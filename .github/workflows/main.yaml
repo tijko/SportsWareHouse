@@ -1,0 +1,20 @@
+name: Test-\#${{ github.run_number }}
+
+run-name: ${{ github.actor }} pushed ${{ github.ref }} \# ${{ github.run_attempt }}
+
+on:
+  push:
+    paths:
+      - '**.py'
+
+jobs:
+  run-nba-database-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout
+      - uses: parafoxia/pip-install@v1
+        name: Pip Install
+        with:
+          requirements: |
+            requirements.txt 
