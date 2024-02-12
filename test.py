@@ -11,7 +11,7 @@ def mysql_db():
     connection = pymysql.connect(
         unix_socket='/tmp/mysql.sock',
         user='tijko',
-        password='(^.^) {@.@} [O.O]',
+        password='@@@@@',
         db='test_db',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor

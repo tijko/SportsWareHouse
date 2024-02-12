@@ -69,7 +69,7 @@ if __name__ == '__main__':
     unix_socket = '/tmp/mysql.sock'
     database = 'nba_stats'
     user = 'tijko'
-    password = 'G**$C0P3150!'
+    password = '*****'
     print('Attempting to connect Database "nba-stats"')
     nba_datahouse = DataHouse(unix_socket, database, user, password)
     nba_datahouse.connect
