@@ -1,5 +1,4 @@
-name: SportsWarehouse ${{ github.run_number }}
-
+name: SportsWarehouse 
 run-name: ${{ github.actor }} pushed ${{ github.run_attempt }}
 
 on: [push]
@@ -15,3 +14,6 @@ jobs:
         with:
           requirements: |
             requirements.txt 
+      - name: ${{ github.run_number }}
+        run: |
+        echo "BOOOO-YAA"
