@@ -25,3 +25,8 @@ jobs:
       - name: ${{ github.run_number }}
         run: |
           echo "BOOOO-YAA"
+      - name: Where is Maria?
+        run: |
+          whereis mariadb
+          whereis mysql
+          whereis mysqld_safe
