@@ -14,19 +14,33 @@ jobs:
         with:
           python-version: '3.11'
           architecture: 'x64'
+
 #      - uses: parafoxia/pip-install@v1
 #        name: Pip Install
 #        with:
 #          requirements: |
 #            requirements.txt 
+
+      - name: Cache Pip Install
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys:
+            ${{ runner.os }}-pip-
+
       - name: Pip Install
         run: |
           python3 -m pip install -r requirements.txt
+
       - name: ${{ github.run_number }}
         run: |
           echo "BOOOO-YAA"
+
       - name: Where is Maria?
         run: |
-          whereis mariadb
+          groups
+          cat /etc/passwd | grep mysql
           whereis mysql
           whereis mysqld_safe
+          pidof mysqld_safe
