@@ -2,10 +2,7 @@ name: Test-${{ github.run_number }}
 
 run-name: ${{ github.actor }} pushed ${{ github.ref }} ${{ github.run_attempt }}
 
-on:
-  push:
-    paths:
-      - '**.py'
+on: [push]
 
 jobs:
   run-nba-database-test:
