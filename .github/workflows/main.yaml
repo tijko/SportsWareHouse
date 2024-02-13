@@ -40,7 +40,7 @@ jobs:
       - name: Where is Maria?
         run: |
           groups
+          whoami
           cat /etc/passwd | grep mysql
           whereis mysql
           whereis mysqld_safe
-          pidof mysqld_safe
