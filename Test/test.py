@@ -54,10 +54,10 @@ def test_mysql_data(mysql_db):
     for _ in range(20):
         data_item_idx = random.randint(0, 5000)
         data = raw_data[data_item_idx]
-        data_id = data_hash[data]
-        cursor.execute(query, (data_id,))
+        data_number = data_hash[data]
+        cursor.execute(query, (data_number,))
         result = cursor.fetchone()
-        print(data, data_hash[data], result['table_name'], data_hash[result['table_name']])
+        #print(data, data_hash[data], result['table_name'], data_hash[result['table_name']])
         # Assert the result
         assert result['table_name'] == data
     # Close the cursor (the connection will be closed automatically by the fixture)
