@@ -29,7 +29,7 @@ def mysql_db():
     data_limit = 5000
     insert_data = dict()
     # Arbitary table-data from dictionary
-    data_hash = {v:k for k,v in enumerate(data, 1)}
+    data_hash = {v:k for k,v in enumerate(raw_data, 1)}
     while picks < data_limit:
         # random data
         item_idx = random.randint(0, 5000)
