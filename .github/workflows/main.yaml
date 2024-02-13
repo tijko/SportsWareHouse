@@ -1,6 +1,6 @@
-name: Test-${{ github.run_number }}
+name: SportsWarehouse ${{ github.run_number }}
 
-run-name: ${{ github.actor }} pushed ${{ github.ref }} ${{ github.run_attempt }}
+run-name: ${{ github.actor }} pushed ${{ github.run_attempt }}
 
 on: [push]
 
