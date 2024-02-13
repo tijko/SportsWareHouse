@@ -1,9 +1,21 @@
 name: SportsWarehouse 
-run-name: ${{ github.actor }} pushed ${{ github.run_attempt }}
+run-name: ${{ github.actor }} pushed
 
 on: [push]
 
 jobs:
+  setup-nba-database:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: P@55W0RD
+          MYSQL_DATABASE: test_db #nba_stats
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
   run-nba-database-test:
     runs-on: ubuntu-latest
     steps:
@@ -14,12 +26,6 @@ jobs:
         with:
           python-version: '3.11'
           architecture: 'x64'
-
-#      - uses: parafoxia/pip-install@v1
-#        name: Pip Install
-#        with:
-#          requirements: |
-#            requirements.txt 
 
       - name: Cache Pip Install
         uses: actions/cache@v2
@@ -33,14 +39,6 @@ jobs:
         run: |
           python3 -m pip install -r requirements.txt
 
-      - name: ${{ github.run_number }}
+      - name: NBA Database Test
         run: |
-          echo "BOOOO-YAA"
-
-      - name: Where is Maria?
-        run: |
-          groups
-          whoami
-          cat /etc/passwd | grep mysql
-          whereis mysql
-          whereis mysqld_safe
+          pytest
