@@ -37,7 +37,7 @@ def mysql_db():
             continue
         item = raw_data[item_idx]
         item_id = data_hash[item]
-        insert_data[item_idx] = item
+        insert_data[item_id] = item
         cursor.execute(query, (item, item_id,))
         picks += 1
     connection.commit()
