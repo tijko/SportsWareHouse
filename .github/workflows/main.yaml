@@ -42,4 +42,5 @@ jobs:
 
       - name: NBA Database Test
         run: |
+          cd Test/
           pytest -v test.py || echo
