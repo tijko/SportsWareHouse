@@ -9,11 +9,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout
-      - uses: parafoxia/pip-install@v1
-        name: Pip Install
+      - name: Set up Python-3.11
+        uses: actions/setup-python@v2
         with:
-          requirements: |
-            requirements.txt 
+          python-version: '3.11'
+          architecture: 'x64'
+#      - uses: parafoxia/pip-install@v1
+#        name: Pip Install
+#        with:
+#          requirements: |
+#            requirements.txt 
+      - name: Pip Install
+        run: |
+          python3 -m pip install -r requirements.txt
       - name: ${{ github.run_number }}
         run: |
           echo "BOOOO-YAA"
