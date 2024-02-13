@@ -33,7 +33,7 @@ def mysql_db():
     while picks < data_limit:
         # random data
         item_idx = random.randint(0, 5000)
-        if insert_data[item_idx]:
+        if insert_data.get(item_idx):
             continue
         item = raw_data[item_idx]
         item_id = data_hash[item]
