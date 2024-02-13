@@ -12,7 +12,7 @@ def mysql_db():
         host='127.0.0.1',
         port=3306,
         user='root',
-        password='P@55W0RD'
+        password='P@55W0RD',
         db='test_db',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
