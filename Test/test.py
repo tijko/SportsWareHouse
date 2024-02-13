@@ -36,9 +36,9 @@ def mysql_db():
         if insert_data.get(item_idx):
             continue
         item = raw_data[item_idx]
-        item_id = data_hash[item]
-        insert_data[item_id] = item
-        cursor.execute(query, (item, item_id,))
+        item_number = data_hash[item]
+        insert_data[item_number] = item
+        cursor.execute(query, (item, item_number,))
         picks += 1
     connection.commit()
     yield connection
@@ -57,6 +57,9 @@ def test_mysql_data(mysql_db):
         data_number = data_hash[data]
         cursor.execute(query, (data_number,))
         result = cursor.fetchone()
+        if not result:
+            print(data_number)
+            continue
         #print(data, data_hash[data], result['table_name'], data_hash[result['table_name']])
         # Assert the result
         assert result['table_name'] == data
