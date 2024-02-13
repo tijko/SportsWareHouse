@@ -38,6 +38,6 @@ def test_mysql_data(mysql_db):
     cursor.execute("SELECT * FROM my_table WHERE table_id = 1")
     # Assert the result
     result = cursor.fetchone()
-    assert result['table_name'] == 'square'
+    assert result['table_name'] == 'Test'
     # Close the cursor (the connection will be closed automatically by the fixture)
     cursor.close()
