@@ -53,7 +53,7 @@ def test_mysql_data(mysql_db):
     cursor = mysql_db.cursor()
     query = "SELECT * FROM my_table WHERE table_number = %s"
     for _ in range(20):
-        data_number = random.choice(insert_data.keys())
+        data_number = random.choice(list(insert_data.keys()))
         data = insert_data[data_number]
         cursor.execute(query, (data_number,))
         result = cursor.fetchone()
