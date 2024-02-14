@@ -6,7 +6,7 @@ import pytest
 import random
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(autouse=True)
 def mysql_db():
     connection = pymysql.connect(
         host='127.0.0.1',
@@ -39,10 +39,10 @@ def mysql_db():
         item_number = data_hash[item]
         insert_data[item_number] = item
         cursor.execute(query, (item, item_number,))
+        print('Insert: {} to {}'.format(item, item_numbr))
         picks += 1
     connection.commit()
     yield connection
-    cursor.execute("DROP TABLE IF EXISTS my_table")
     # Close the cursor and the connection
     cursor.close()
     connection.close()
@@ -58,10 +58,10 @@ def test_mysql_data(mysql_db):
         cursor.execute(query, (data_number,))
         result = cursor.fetchone()
         if not result:
-            print(data_number)
             continue
-        #print(data, data_hash[data], result['table_name'], data_hash[result['table_name']])
+        print('Found.....{}'.format(data_number))
         # Assert the result
         assert result['table_name'] == data
+        print('Hit a match for....{}'.format(data))
     # Close the cursor (the connection will be closed automatically by the fixture)
     cursor.close()
