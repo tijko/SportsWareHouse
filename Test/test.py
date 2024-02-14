@@ -39,7 +39,7 @@ def mysql_db():
         item_number = data_hash[item]
         insert_data[item_number] = item
         cursor.execute(query, (item, item_number,))
-        print('Insert: {} to {}'.format(item, item_numbr))
+        print('Insert: {} to {}'.format(item, item_number))
         picks += 1
     connection.commit()
     yield connection
