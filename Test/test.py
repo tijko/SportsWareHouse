@@ -24,6 +24,7 @@ def mysql_db():
     # Load data
     global data_hash
     global raw_data
+    global insert_data
     with open('test-data.txt') as fh:
         raw_data = [s.strip('\n') for s in fh.readlines()]
     data_limit = 5000
@@ -32,7 +33,7 @@ def mysql_db():
     data_hash = {v:k for k,v in enumerate(raw_data, 1)}
     while picks < data_limit:
         # random data
-        item_idx = random.randint(0, 5000)
+        item_idx = random.randint(0, 466550)
         if insert_data.get(item_idx):
             continue
         item = raw_data[item_idx]
@@ -52,9 +53,8 @@ def test_mysql_data(mysql_db):
     cursor = mysql_db.cursor()
     query = "SELECT * FROM my_table WHERE table_number = %s"
     for _ in range(20):
-        data_item_idx = random.randint(0, 5000)
-        data = raw_data[data_item_idx]
-        data_number = data_hash[data]
+        data_number = random.choice(insert_data.keys())
+        data = insert_data[data_number]
         cursor.execute(query, (data_number,))
         result = cursor.fetchone()
         if not result:
