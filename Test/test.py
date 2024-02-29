@@ -48,6 +48,20 @@ def mysql_db():
     cursor.close()
     connection.close()
 
+def test_max_word(mysql_db):
+    cursor = mysql_db.cursor()
+    item = 'pneumonoultramicroscopicsilicovolcanoconiosis'
+    print('Testing max word ({}) insert into field.'.format(item))
+    item_number = data_hash[item]
+    print('Inserting max word ({}) into database....'.format(item))
+    query = "INSERT INTO my_table(table_name, table_number) VALUES (%s, %s)"
+    cursor.execute(query, (item, item_number,))
+    query = "SELECT * FROM my_table WHERE table_number = %s"
+    print('Querying database....')
+    cursor.execute(query, (item_number))
+    test_fetch = cursor.fetchone()
+    assert item == test_fetch['table_name']
+
 def test_mysql_data(mysql_db):
     # Use the mysql_db fixture to interact with the MySQL database
     cursor = mysql_db.cursor()
