@@ -19,6 +19,7 @@ def mysql_db():
     )
     cursor = connection.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS my_table(table_id INT PRIMARY KEY AUTO_INCREMENT, table_name VARCHAR(64) NOT NULL, table_number INT NOT NULL)")
+    global query
     query = "INSERT INTO my_table(table_name, table_number) VALUES (%s, %s)"
     picks = 0
     # Load data
@@ -47,6 +48,16 @@ def mysql_db():
     # Close the cursor and the connection
     cursor.close()
     connection.close()
+
+def test_max_word(mysql_db):
+    cursor = mysql_db.cursor()
+    item = 'pneumonoultramicroscopicsilicovolcanoconiosis'
+    item_number = data_hash[item]
+    cursor.execute(query, (item, item_number,))
+    query = "SELECT * FROM my_table WHERE table_number = %s"
+    cursor.execute(query, (item_number))
+    test_fetch = cursor.fetchone()
+    assert item == test_fetch
 
 def test_mysql_data(mysql_db):
     # Use the mysql_db fixture to interact with the MySQL database
