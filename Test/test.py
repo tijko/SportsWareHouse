@@ -18,7 +18,7 @@ def mysql_db():
         cursorclass=pymysql.cursors.DictCursor
     )
     cursor = connection.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS my_table(table_id INT PRIMARY KEY AUTO_INCREMENT, table_name VARCHAR(32) NOT NULL, table_number INT NOT NULL)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS my_table(table_id INT PRIMARY KEY AUTO_INCREMENT, table_name VARCHAR(64) NOT NULL, table_number INT NOT NULL)")
     query = "INSERT INTO my_table(table_name, table_number) VALUES (%s, %s)"
     picks = 0
     # Load data

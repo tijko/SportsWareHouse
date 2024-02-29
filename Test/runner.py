@@ -18,7 +18,7 @@ def mysql_connect():
         cursorclass=pymysql.cursors.DictCursor
     )
     cursor = connection.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS my_table(table_id INT PRIMARY KEY AUTO_INCREMENT, table_name VARCHAR(32) NOT NULL, table_number INT NOT NULL)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS my_table(table_id INT PRIMARY KEY AUTO_INCREMENT, table_name VARCHAR(64) NOT NULL, table_number INT NOT NULL)")
     query = "INSERT INTO my_table(table_name, table_number) VALUES (%s, %s)"
     picks = 0
     # Load data
@@ -52,14 +52,11 @@ def mysql_connect():
         item_number = data_hash[item]
         insert_data[item_number] = item
         cursor.execute(query, (item, item_number,))
-        #print('Insert: {} to {}'.format(item, item_number))
         picks += 1
     connection.commit()
     #yield connection
     #cursor.execute("DROP TABLE IF EXISTS my_table")
-    # Close the cursor and the connection
     cursor.close()
-    #connection.close()
     return connection
 
 def run_test(connection):
@@ -73,8 +70,6 @@ def run_test(connection):
         if not result:
             print(data_number)
             continue
-        #print('Found.....{}'.format(data_number))
-        #print(data, data_hash[data], result['table_name'], data_hash[result['table_name']])
         # Assert the result
         print('Hit a match for....{}'.format(data))
 
@@ -95,8 +90,4 @@ if __name__ == '__main__':
         raw_data = [s.strip('\n') for s in fh.readlines()]
     data_hash = {}
     connection = mysql_connect()
-    #import time
-    #print(raw_data)
-    #time.sleep(10)
-    #run_test(connection)
     duplicate_finder(connection)
