@@ -14,6 +14,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: P@55W0RD
           MYSQL_DATABASE: test_db #nba_stats
+          MYSQLCLIENT_LDFLAGS: $(pkg-config --libs mysqlclient)
+          MYSQLCLIENT_CFLAGS: $(pkg-config --cflags mysqlclient)
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
