@@ -4,6 +4,7 @@
 import pymysql
 import pytest
 import random
+import requests
 
 
 @pytest.fixture(autouse=True)
@@ -47,6 +48,12 @@ def mysql_db():
     # Close the cursor and the connection
     cursor.close()
     connection.close()
+
+def test_balldontlie_endpoint():
+    api_key = '927849b5-7388-4d13-bdce-0a16575ceb5a'
+    stat_query_cmd = "https://api.balldontlie.io/v1/{} -H 'Authorization:{}'"
+    req = requests.get(stat_query_cmd.format('stats?season[]=2023', api_key))
+    assert req.ok == True
 
 def test_max_word(mysql_db):
     cursor = mysql_db.cursor()

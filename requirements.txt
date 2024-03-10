@@ -1,5 +1,6 @@
 mysql-connector-python
 bs4
 pymysql
+requests
 pytest
 cryptography
